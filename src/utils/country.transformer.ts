@@ -8,11 +8,12 @@ export const countryTransformer = (country: ICountry): ITransformCountry => {
     : null;
 
   const nativeName = firstNativeName + " - " + firstNativeNameKey;
-  const suffixMap = country.idd?.suffixes?.map(
-    (suffix) => country.idd.root + suffix
-  );
+  const suffixMap = country.idd?.suffixes
+    ? country.idd?.suffixes?.map((suffix) => country.idd.root + suffix)
+    : [country.idd.root];
 
-  const countryCode: string = suffixMap ? suffixMap.join(", ") : "N/A";
+  const countryCode: string =
+    suffixMap.length > 0 ? suffixMap.join(", ") : suffixMap.join("");
 
   const transform: ITransformCountry = {
     name: country?.name.official,
