@@ -2,11 +2,23 @@
 
 import Image from "next/image";
 import { ColumnDef } from "@tanstack/react-table";
+import { Button } from "./ui/button";
+import { ArrowUpDown } from "lucide-react";
 
 export const countryColumns: ColumnDef<ITransformCountry>[] = [
   {
     accessorKey: "name",
-    header: "Name",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Name
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
     cell: ({ row }) => (
       <p className="text-xs md:text-sm">{row.getValue("name")}</p>
     ),
