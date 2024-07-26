@@ -52,7 +52,7 @@ export function CountryDataTable<TData, TValue>({
               <TableRow key={headerGroup.id}>
                 {headerGroup.headers.map((header) => {
                   return (
-                    <TableHead key={header.id}>
+                    <TableHead key={header.id} className="text-xs md:text-sm">
                       {header.isPlaceholder
                         ? null
                         : flexRender(

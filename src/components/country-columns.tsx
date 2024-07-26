@@ -7,7 +7,9 @@ export const countryColumns: ColumnDef<ITransformCountry>[] = [
   {
     accessorKey: "name",
     header: "Name",
-    cell: ({ row }) => <p>{row.getValue("name")}</p>,
+    cell: ({ row }) => (
+      <p className="text-xs md:text-sm">{row.getValue("name")}</p>
+    ),
   },
 
   {
@@ -26,24 +28,32 @@ export const countryColumns: ColumnDef<ITransformCountry>[] = [
   {
     accessorKey: "cca2",
     header: "CCA2",
-    cell: ({ row }) => <p>{row.getValue("cca2")}</p>,
+    cell: ({ row }) => (
+      <p className="text-xs md:text-sm">{row.getValue("cca2")}</p>
+    ),
   },
 
   {
     accessorKey: "cca3",
     header: "CCA3",
-    cell: ({ row }) => <p>{row.getValue("cca3")}</p>,
+    cell: ({ row }) => (
+      <p className="text-xs md:text-sm">{row.getValue("cca3")}</p>
+    ),
   },
 
   {
     accessorKey: "nativeName",
     header: "Native Name",
-    cell: ({ row }) => <p>{row.getValue("nativeName")}</p>,
+    cell: ({ row }) => (
+      <p className="text-xs md:text-sm">{row.getValue("nativeName")}</p>
+    ),
   },
   {
     accessorKey: "altSpellings",
     header: "Alt Spellings",
-    cell: ({ row }) => <p>{row.getValue("altSpellings")}</p>,
+    cell: ({ row }) => (
+      <p className="text-xs md:text-sm">{row.getValue("altSpellings")}</p>
+    ),
   },
 
   {
@@ -51,7 +61,9 @@ export const countryColumns: ColumnDef<ITransformCountry>[] = [
     header: "IDD",
 
     cell: ({ row }) => (
-      <p className="w-[200px] truncate">{row.getValue("idd")}</p>
+      <p className="w-[200px] truncate text-xs md:text-sm">
+        {row.getValue("idd")}
+      </p>
     ),
   },
 ];
