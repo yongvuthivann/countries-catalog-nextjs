@@ -32,7 +32,7 @@ export default async function Home() {
         </p>
       </div>
 
-      <div className="mt-8">
+      <div className="mt-2">
         <CountryDataTable
           columns={countryColumns}
           data={countriesTransformer}
