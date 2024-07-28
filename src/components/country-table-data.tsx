@@ -2,9 +2,11 @@
 
 import {
   ColumnDef,
+  ColumnFiltersState,
   SortingState,
   flexRender,
   getCoreRowModel,
+  getFilteredRowModel,
   getPaginationRowModel,
   getSortedRowModel,
   useReactTable,
@@ -21,6 +23,7 @@ import {
 import { Button } from "./ui/button";
 import { useState } from "react";
 import RowSelection from "./row-selection";
+import { Input } from "./ui/input";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -33,6 +36,7 @@ export function CountryDataTable<TData, TValue>({
 }: DataTableProps<TData, TValue>) {
   const [pageSize] = useState<number>(25);
   const [sorting, setSorting] = useState<SortingState>([]);
+  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
 
   const table = useReactTable({
     data,
@@ -41,6 +45,8 @@ export function CountryDataTable<TData, TValue>({
     onSortingChange: setSorting,
     getSortedRowModel: getSortedRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
+    onColumnFiltersChange: setColumnFilters,
+    getFilteredRowModel: getFilteredRowModel(),
     initialState: {
       pagination: {
         pageIndex: 0,
@@ -49,11 +55,29 @@ export function CountryDataTable<TData, TValue>({
     },
     state: {
       sorting,
+      columnFilters,
     },
   });
 
   return (
     <div>
+      <div className="flex items-center py-4">
+        <Input
+          placeholder="Filter name..."
+          value={(table.getColumn("name")?.getFilterValue() as string) ?? ""}
+          onChange={(event) =>
+            table.getColumn("name")?.setFilterValue(event.target.value)
+          }
+          className="max-w-sm"
+        />
+        <Button
+          className="ml-2 text-xs"
+          variant="secondary"
+          onClick={() => table.getColumn("name")?.setFilterValue("")}
+        >
+          Reset
+        </Button>
+      </div>
       <div className="rounded-md border">
         <Table>
           <TableHeader>
